@@ -11,12 +11,11 @@
 	margin-right: auto;
 
 }
-#redovi_kolone th
-{	
-	position: relative;
-    top: -180px;
-	color:yellow;
-	background-color: gray;
+#redovi_kolone th {
+    position: relative;
+    top: 1px;
+    color: yellow;
+    background-color: gray;
 }
 #redovi_kolone tr:nth-child(even)
 {	
