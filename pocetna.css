@@ -60,7 +60,7 @@ table, td, tr{
 #dugme
 {	
     margin-left: 100px;
-	margin-top:25px;
+	margin-top:-3px;
 }
 
 .Linkovi 
@@ -139,7 +139,7 @@ table, td, tr{
     color: #16052B;
     padding: 10px 20px 0px 10px;
     font-size: small;
-    height: 179px;
+    height: 215px;
     list-style-type: none;
     text-decoration: none;
     overflow: hidden;
@@ -175,3 +175,7 @@ table, td, tr{
     padding-bottom:20px;
 }
 
+.vrObjave{
+	font-size:9px;
+	color:grey;
+}
