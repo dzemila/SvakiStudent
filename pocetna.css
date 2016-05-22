@@ -31,7 +31,25 @@
     width: 80%;
 }
 
+.vijesti
+{
+position: relative;
+    left: 120px;
+    background-color: #0012CA;
+    padding: 10px 10px 150px 5px;
+    color: white;
+	border: 2px solid black;
+    width: 35%;
+	height:27px;
+	display:inline-block;
+	height:110px;
+	margin: 5px 5px 5px 5px;
+}
 
+.vijesti img{
+	width: 150px;
+height: 100px;
+}
 table{
     width:80%;
 	border-collapse:collapse;
@@ -56,6 +74,36 @@ table, td, tr{
     top: -120px;
     position: relative;
 }
+
+.forma2
+{	
+	color:#16052B;
+	background-color: yellow;
+    font-size: 20px;
+    border: 2px solid black;
+    border-radius: 20%;
+    padding: 38px 70px 28px 38px;
+    width: 160px;
+    height: 230px;
+    margin: auto;
+    top: 0px;
+    position: relative;
+}
+.forma3
+{	
+	color:#16052B;
+	background-color: yellow;
+    font-size: 20px;
+    border: 2px solid black;
+    border-radius: 20%;
+    padding: 38px 70px 28px 38px;
+    width: 260px;
+    height: 230px;
+    margin: auto;
+    top: 20px;
+    position: relative;
+}
+
 
 #dugme
 {	
@@ -120,7 +168,7 @@ table, td, tr{
 .Menu li {
     display: inline;
 	float: left;
-	margin: -7px 44px 4px 0;
+	margin: -7px 21px 4px 0;
 	text-align: center;
 	padding-left: 20px;
 	

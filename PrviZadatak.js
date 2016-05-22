@@ -1,78 +1,148 @@
-window.onload = function Datum(){
-
-	var trenutno = new Date();
-	var objavaKlasa = "objava";
-	var dani = ["dan", "dana"];
-	var minuta = ["minute", "minuta"];
-	var sati = ["sat", "sata", "sati"];
-	var ispis = document.getElementsByClassName(objavaKlasa);
+onload=function novosti()
+{	
+	var trenutniVakat = new Date();
+	var dan = trenutniVakat.getDate();
+	var mjesec = trenutniVakat.getMonth()+1; 
+	var godina = trenutniVakat.getFullYear();
+	var sahat = trenutniVakat.getHours();
+	var minutice = trenutniVakat.getMinutes();
 	
-	for(var i=0; i<ispis.length; i++){
-		var datumObjave = new Date(ispis[i].getAttribute("datetime"));
-		
-		if(trenutno.getFullYear() == datumObjave.getFullYear()){
-			if((trenutno.getMonth() + 1) == (datumObjave.getMonth()+1)){
-				if(trenutno.getDate() == datumObjave.getDate())
+	var ispis = document.getElementsByClassName("datumiObjave");
+	for(var i = 0; i<ispis.length;i++)
+	{
+		var a = ispis[i].getAttribute("datetime");
+		var ispis_vakta = new Date(a);
+		if(godina - ispis_vakta.getFullYear() == 0)
+		{
+			if(mjesec - (ispis_vakta.getMonth()+1) ==0 )
+			{
+				if (sahat - ispis_vakta.getHours() == 0)
 				{
-					if(trenutno.getHours() == datumObjave.getHours()){
-					if(trenutno.getMinutes() == datumObjave.getMinutes())
+					if(minutice - ispis_vakta.getMinutes() == 0)
 					{
-						document.getElementsByClassName(objavaKlasa)[i].innerHTML = " par sekundi";
+						document.getElementsByClassName("datumiObjave")[i].innerHTML=" par sekundi";
 					}
-					else if(trenutno.getMinutes() > datumObjave.getMinutes() && (trenutno.getMinutes() - datumObjave.getMinutes())<5 ) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + (trenutno.getMinutes() - datumObjave.getMinutes()) + " " + minuta[0];
-					else if(trenutno.getMinutes() > datumObjave.getMinutes()) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + (trenutno.getMinutes() - datumObjave.getMinutes()) + " " + minuta[1];
-					}
-					else{
-						
-						var trenutnoMinusObjava = (trenutno.getMinutes() + trenutno.getHours()*60) - (datumObjave.getMinutes() + datumObjave.getHours()*60);
-						if(trenutnoMinusObjava < 5) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + trenutnoMinusObjava + " " + minuta[0];
-						else if(trenutnoMinusObjava >5 && trenutnoMinusObjava<60) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + trenutnoMinusObjava + " " + minuta[1];
-						else if(trenutnoMinusObjava>60 && trenutnoMinusObjava<120) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/60) + " " + sati[0];
-						else if(trenutnoMinusObjava>120 && trenutnoMinusObjava<(60*5)) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/60) + " " + sati[1];
-						else if(trenutnoMinusObjava>(60*21) && trenutnoMinusObjava<(60*22)) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/60) + " " + sati[0];
-						else if(trenutnoMinusObjava>(60*22) && trenutnoMinusObjava<(60*25)) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/60) + " " + sati[1];
-						else document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/60) + " " + sati[2];
-					}
+					else if(minutice-ispis_vakta.getMinutes()<5)
+							document.getElementsByClassName("datumiObjave")[i].innerHTML= " prije " +(minutice-ispis_vakta.getMinutes())+ +" minute";
+					else 
+						document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije " +(minutice-ispis_vakta.getMinutes()) +" minuta";
+				} 
+				else if(dan-ispis_vakta.getDate()>=1 && dan-ispis_vakta.getDate()<2)
+					{
 					
-				
-				}
-				else{
-					var trenutnoMinusObjava = (trenutno.getMinutes() + trenutno.getHours()*60 + trenutno.getDate()*60*24) - (datumObjave.getMinutes() + datumObjave.getHours()*60 + datumObjave.getDate()*60*24);
-					if(trenutnoMinusObjava < 5) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + trenutnoMinusObjava + " " + minuta[0]; 
-					else if(trenutnoMinusObjava >5 && trenutnoMinusObjava<60) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + trenutnoMinusObjava + " " + minuta[1];
-					else if(trenutnoMinusObjava>60 && trenutnoMinusObjava<120) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/60) + " " + sati[0];
-					else if(trenutnoMinusObjava>120 && trenutnoMinusObjava<240) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/60) + " " + sati[1];
-					else{
-						trenutnoMinusObjava = parseInt(trenutnoMinusObjava/60);
-						if(trenutnoMinusObjava < 21) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + trenutnoMinusObjava + " " + sati[2];
-						else if(trenutnoMinusObjava == 21) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + trenutnoMinusObjava + " " + sati[0];
-						else if(trenutnoMinusObjava < 24) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + trenutnoMinusObjava + " " + sati[1]; 
-						else if(parseInt(trenutnoMinusObjava/24)==1) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/24) + " " + dani[0];
-						else if(parseInt(trenutnoMinusObjava/24)<7)document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/24) + " " + dani[1];
-						else if(parseInt(trenutnoMinusObjava/24)>7)document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt((trenutnoMinusObjava/24)/7) + " sedmice";
+						if(sahat-ispis_vakta.getHours()<0)
+						{
+							if(sahat+(24-ispis_vakta.getHours())==1 || sahat+(24-ispis_vakta.getHours())==21) 
+								document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(sahat+(24-ispis_vakta.getHours()))+" sat";
+							else 
+								if((sahat+(24-ispis_vakta.getHours())>1 && sahat+(24-ispis_vakta.getHours())<5) || (sahat+(24-ispis_vakta.getHours())>21 && sahat+(24-ispis_vakta.getHours())<24))
+							{
+								document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(sahat+(24-ispis_vakta.getHours()))+" sata";
+							}
+							else if(sahat+(24-ispis_vakta.getHours())>4 && hh+(24-ispis_vakta.getHours())<20)
+								{
+									document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(sahat+(24-ispis_vakta.getHours()))+" sati";
+								}
+						}
+						else 
+						{
+							document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(dan-ispis_vakta.getDate())+" dan";
+						}
 					}
+				else 
+				{
+						if(minutice-ispis_vakta.getMinutes()<0)
+						{
+							document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(minutice+(60-ispis_vakta.getMinutes())) +"minuta";
+						}
+						else
+							if(minutice-ispis_vakta.getMinutes()>0 && sahat-ispis_vakta.getHours()==1)
+							{
+								document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(sahat-ispis_vakta.getHours())+"sat";
+							}
+							else if(sahat-ispis_vakta.getHours()>1 && sahat-ispis_vakta.getHours()<5)
+							{
+								document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(sahat-ispis_vakta.getHours())+" sata";
+							}
+							else if(sahat-ispis_vakta.getHours()>=5 && sahat-ispis_vakta.getHours()<21)
+							{
+								document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(sahat-ispis_vakta.getHours())+" sati";
+							}
+							else if(sahat-ispis_vakta.getHours()==21)
+							{
+								document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(sahat-ispis_vakta.getHours())+" sat";
+							}
+							else if(sahat-ispis_vakta.getHours()>21 && sahat-ispis_vakta.getHours()<=24)
+							{
+								document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(sahat-ispis_vakta.getHours())+" sata";
+							}
+				}
+				
+			}
+			else if(minutice-(ispis_vakta.getMonth()+1)==1)
+			{
+				if((30+dan)-ispis_vakta.getDate()>=2 && (30+dan)-ispis_vakta.getDate()<7)
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+((30+dan)-ispis_vakta.getDate())+ " dan";
+				}
+				else if((30+dan)-ispis_vakta.getDate()>=7 && (30+dan)-ispis_vakta.getDate()<14)
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(1)+" sedmicu";
+				}
+				else if((30+dan)-ispis_vakta.getDate()>=14 && (30+dan)-ispis_vakta.getDate()<21)
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(2)+ " sedmice";
+				}
+				else if((30+dan)-ispis_vakta.getDate()>=21 && (30+dan)-ispis_vakta.getDate()<28)
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(3)+" sedmice";
+				}
+				else if(dan-ispis_vakta.getDate()==28)
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(4)+ " sedmice";
+				}
+				else if(dan-ispis_vakta.getDate()>=2 && dan-ispis_vakta.getDate()<7)
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(dan-ispis_vakta.getDate())+" dana";
+				}
+				else if(dan-ispis_vakta.getDate()>=7 && dan-ispis_vakta.getDate()<14)
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(1)+" sedmicu";
+				}
+				else if(dan-ispis_vakta.getDate()>=14 && dan-ispis_vakta.getDate()<21)
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(2) + "sedmice";
+				}
+				else if(dan-ispis_vakta.getDate()>=21 && dan-ispis_vakta.getDate()<29)
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije "+(3)+ " sedmice";
+				}
+				else if(dan-ispis_vakta.getDate()==28)
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=" prije"+(4)+ " sedmice";
+				}
+				else 
+				{
+					document.getElementsByClassName("datumiObjave")[i].innerHTML=ispis_(ispis_vakta.getDate(), ispis_vakta.getMonth()+1, ispis_vakta.getFullYear());	
 				}
 			}
-				else{
-					var trenutnoMinusObjava = (trenutno.getMinutes() + trenutno.getHours()*60 + trenutno.getDate()*60*24 + (trenutno.getMonth()+1)*30*60*24) - (datumObjave.getMinutes() + datumObjave.getHours()*60 +datumObjave.getDate()*60*24 +(datumObjave.getMonth()+1)*60*24*30);
-					if(trenutnoMinusObjava < 5) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + trenutnoMinusObjava + " " + minuta[0]; 
-					else if(trenutnoMinusObjava >5 && trenutnoMinusObjava<60) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + trenutnoMinusObjava + " " + minuta[1];
-					else if(trenutnoMinusObjava>60 && trenutnoMinusObjava<120) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/60) + " " + sati[0];
-					else if(trenutnoMinusObjava>120 && trenutnoMinusObjava<240) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/60) + " " + sati[1];
-					else{
-						trenutnoMinusObjava = parseInt(trenutnoMinusObjava/60);
-						if(trenutnoMinusObjava < 24) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + trenutnoMinusObjava + " " + sati[2];
-						else if(parseInt(trenutnoMinusObjava/24)==1) document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/24) + " " + dani[0];
-						else if(parseInt(trenutnoMinusObjava/24)<7)document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt(trenutnoMinusObjava/24) + " " + dani[1];
-						else if(parseInt(trenutnoMinusObjava/24)>7 && parseInt(trenutnoMinusObjava/24)<28)document.getElementsByClassName(objavaKlasa)[i].innerHTML = " prije " + parseInt((trenutnoMinusObjava/24)/7) + " sedmice";
-						else document.getElementsByClassName(objavaKlasa)[i].innerHTML=" " + datumObjave.getDate() + "-" + (datumObjave.getMonth()+1) + "-" + datumObjave.getFullYear() + " g";
-					}
-				}
-			
-		
+			else 
+			{
+				document.getElementsByClassName("datumiObjave")[i].innerHTML=ispis_(ispis_vakta.getDate(), ispis_vakta.getMonth()+1, ispis_vakta.getFullYear());	
+			}
 		}
-		else document.getElementsByClassName(objavaKlasa)[i].innerHTML=" " + datumObjave.getDate() + "-" + (datumObjave.getMonth()+1) + "-" + datumObjave.getFullYear() + " g";
+		else 
+		{
+			document.getElementsByClassName("datumiObjave")[i].innerHTML=ispis_(ispis_vakta.getDate(), ispis_vakta.getMonth()+1, ispis_vakta.getFullYear());	
+		}
+
+												
 	}
 }
 
 
+
+function ispis_(a,b,c)
+{
+	return a+"-"+b+"-"+c;
+}
