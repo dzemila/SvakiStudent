@@ -73,7 +73,7 @@ else
 	</form>
 	</id>
 <div class="Clanak1"> 
-		<div class="centar">
+	<div class="centar">
 	
 		<div class="Vijesti1">
 			<ul>
@@ -111,8 +111,8 @@ else
 							
 							print " <li class='vijesti'>
 							<h4>".$cv[0]."</h4>
-									<img src='".$cv[3]."' alt='".$cv[3]."'>
-									<p>Objavljeno <time class='datumiObjave' datetime='".$cv[2]."'></time>.</p>
+									<img src='".$cv[2]."' alt='".$cv[2]."'>
+									<p>Objavljeno <time class='objava' datetime='".$cv[0]."'></time>.</p>
 		<p>
 		".$cv[1]." 
 		</p>
@@ -133,8 +133,8 @@ else
 							
 							print "<li class='vijesti'>
 							<h4>".$cv[0]."</h4>
-									<img src='".$cv[3]."' alt='".$cv[3]."'>
-									<p>Objavljeno <time class='datumiObjave' datetime='".$cv[2]."'></time>.</p>
+									<img src='".$cv[2]."' alt='".$cv[2]."'>
+									<p>Objavljeno <time class='objava' datetime='".$cv[0]."'></time>.</p>
 		<p>
 		".$cv[1]." 
 		</p>
@@ -148,13 +148,12 @@ else
 							$i=0;
 							for($i=0; $i < $broj_novosti; $i++) {
 							$cv =explode(',',$vijesti[$i]);
-							//$cv = fgetcsv($vijesti[$i], 2024);
 							$cv[0]=str_replace(";.?",",",$cv[0]);
 							
 								print "<li class='vijesti'>
 							<h4>".$cv[0]."</h4>
-									<img src='".$cv[0]."' alt='".$cv[0]."'>
-									<p>Objavljeno <time class='datumiObjave' datetime='".$cv[2]."'></time>.</p>
+									<img src='".$cv[2]."' alt='".$cv[2]."'>
+									<p>Objavljeno <time class='objava' datetime='".$cv[0]."'></time>.</p>
 		<p>
 		".$cv[1]." 
 		</p>
